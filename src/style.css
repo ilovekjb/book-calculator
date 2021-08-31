@@ -1,0 +1,29 @@
+.content {
+    max-width: 800px;
+    margin: auto;
+}
+
+.search {
+    width: 100%;
+    padding: 5px 8px;
+}
+
+.title {
+    text-align: center;
+}
+
+.check {
+    width: 15px;
+}
+
+.price {
+    width: 50px;
+}
+
+.number {
+    width: 50px;
+}
+
+.number-input {
+    width: 50px;
+}
