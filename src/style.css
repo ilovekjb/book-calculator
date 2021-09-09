@@ -2,6 +2,7 @@
     max-width: 800px;
     margin: auto;
     padding: 24px 8px;
+    padding-bottom: 50px;
 }
 
 .search {
@@ -28,11 +29,11 @@
 }
 
 .number {
-    width: 50px;
+    width: 60px;
 }
 
 .number-input {
-    width: 50px;
+    width: 30px;
 }
 
 .button-wrap {
@@ -51,4 +52,8 @@
 .copy-btn:hover {
     background: rgb(206, 111, 2);
     cursor: pointer;
+}
+
+.msg {
+    text-align: center;
 }
