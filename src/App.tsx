@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './style.css'
-import { books as bookList, Book } from './books'
+import { paid, free, Book } from './books'
 
 function App() {
-  const [books, setState] = useState<Book[]>(bookList)
+  const [books, setState] = useState<Book[]>([...paid, ...free])
   const [search, setSearch] = useState('')
 
   return (
@@ -27,44 +27,68 @@ function App() {
             <tr>
               <th></th>
               <th>제목</th>
-              <th className="price">가격</th>
+              <th className="price-header">가격</th>
               <th className="number">수량</th>
             </tr>
           </thead>
           <tbody>
             { (search === '' ? books : books.filter((book) => book.title.includes(search))).map((book, i) => {
               return (
-                <tr>
+                <tr key={i}>
                   <td>
                     <input type="checkbox" checked={book.checked} onChange={(e) => {
                       if ((e.target as any).checked) {
-                        const newBooks = books.map((item, index) => {
+                        let newBooks = books.map((item, index) => {
                           if (index === i) {
                             return { ...item, count: 1, checked: true }
                           }
 
                           return item
                         })
+
+                        if (paid.filter(book => book.title === books[i].title).length > 0) {
+                          newBooks = newBooks.map(item => {
+                            if (item.discountedPrice <= 500) {
+                              return { ...item, discountedPrice: 0 }
+                            }
+
+                            return item
+                          })
+                        }
+
                         setState(newBooks)
                       } else {
-                        const newBooks = books.map((item, index) => {
+                        let newBooks = books.map((item, index) => {
                           if (index === i) {
                             return { ...item, count: 0, checked: false }
                           }
 
                           return item
                         })
+
+                        const buyingTitles = newBooks.filter(book => book.checked).map(book => book.title)
+
+                        if (paid.filter(book => buyingTitles.includes(book.title)).length === 0) {
+                          newBooks = newBooks.map(item => {
+                            if (item.discountedPrice === 0) {
+                              return { ...item, discountedPrice: 500 }
+                            }
+
+                            return item
+                          })
+                        }
+
                         setState(newBooks)
                       }
                     }} />
                   </td>
                   <td>{book.title}</td>
-                  <td className="price">{book.discountedPrice}</td>
+                  <td className="price">{book.discountedPrice}원</td>
                   <td className="number">
                     <input className="number-input" type="number" min={0} value={book.count} onChange={(e) => { 
-                      const newBooks = books.map((item, index) => {
+                      const count = parseInt(e.target.value)
+                      let newBooks = books.map((item, index) => {
                         if (index === i) {
-                          const count = parseInt(e.target.value)
                           const checked = count !== 0
 
                           return { ...item, count, checked }
@@ -72,6 +96,30 @@ function App() {
 
                         return item
                       })
+
+                      if (count > 0) {
+                        if (paid.filter(book => book.title === books[i].title).length > 0) {
+                          newBooks = newBooks.map(item => {
+                            if (item.discountedPrice <= 500) {
+                              return { ...item, discountedPrice: 0 }
+                            }
+  
+                            return item
+                          })
+                        }
+                      } else {
+                        const buyingTitles = newBooks.filter(book => book.checked).map(book => book.title)
+
+                        if (paid.filter(book => buyingTitles.includes(book.title)).length === 0) {
+                          newBooks = newBooks.map(item => {
+                            if (item.discountedPrice === 0) {
+                              return { ...item, discountedPrice: 500 }
+                            }
+
+                            return item
+                          })
+                        }
+                      }
 
                       setState(newBooks)
                     }}/>
@@ -84,29 +132,36 @@ function App() {
       </div>
       <div>
         <h2>주문할 책들</h2>
-        <table style={{ width: '100%'}}>
-          <thead>
-            <tr>
-              <th>제목</th>
-              <th className="number">수량</th>
-              <th className="price">가격</th>
-            </tr>
-          </thead>
-          <tbody>
-          {books.filter(book => book.count > 0).map((item) => {
-            return (
+        <div>
+          <table style={{ width: '100%'}}>
+            <thead>
               <tr>
-                <td>{item.title}</td>
-                <td className="number">{item.count}</td>
-                <td className="price">{item.discountedPrice * item.count}</td>
+                <th>제목</th>
+                <th className="number">수량</th>
+                <th className="price">가격</th>
               </tr>
-            )
-          })}
-          </tbody>
-        </table>
-        <p>총액: {books.reduce((sum, book) => {
-          return sum + book.discountedPrice * book.count
-        }, 0)}</p>
+            </thead>
+            <tbody>
+            {books.filter(book => book.count > 0).map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{item.title}</td>
+                  <td className="number">{item.count}권</td>
+                  <td className="price">{item.discountedPrice * item.count}원</td>
+                </tr>
+              )
+            })}
+            </tbody>
+          </table>
+          <p>총액: {books.reduce((sum, book) => {
+            return sum + book.discountedPrice * book.count
+          }, 0)}</p>
+        </div>
+        <div className="button-wrap">
+          <button className="copy-btn" onClick={() => {
+            navigator.clipboard.writeText('text to copy');
+          }}>복사하기</button>
+        </div>
       </div>
     </div>
   );

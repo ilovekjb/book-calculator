@@ -1,6 +1,7 @@
 .content {
     max-width: 800px;
     margin: auto;
+    padding: 24px 8px;
 }
 
 .search {
@@ -16,8 +17,14 @@
     width: 15px;
 }
 
+.price-header {
+    width: 80px;
+    text-align: center;
+}
+
 .price {
-    width: 50px;
+    width: 80px;
+    text-align: right;
 }
 
 .number {
@@ -26,4 +33,22 @@
 
 .number-input {
     width: 50px;
+}
+
+.button-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.copy-btn {
+    background: darkorange;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 24px;
+    border: 0;
+}
+
+.copy-btn:hover {
+    background: rgb(206, 111, 2);
+    cursor: pointer;
 }
