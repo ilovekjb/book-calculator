@@ -99,6 +99,11 @@ function App() {
                           return item
                         })
 
+                        const index = buyingTitles.indexOf(book.title)
+                        if (index > -1) {
+                          buyingTitles.splice(index, 1)
+                        }
+
                         if (paid.filter(book => buyingTitles.includes(book.title)).length === 0) {
                           newBooks = newBooks.map(item => {
                             if (item.discountedPrice === 0) {
@@ -159,7 +164,7 @@ function App() {
           </tbody>
         </table>
       </div>
-      <div>
+      <div className="invoice">
         <h2 className="title">주문할 책들</h2>
         {
           buying.length > 0 ? (

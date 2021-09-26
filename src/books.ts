@@ -47,6 +47,17 @@ export const paid: Book[] = [
   { title: "경이로운 성경의 예언과 성취", price: 7000, discountedPrice: 6000 , count: 0, checked: false, },
   { title: "영의 세계", price: 7000, discountedPrice: 6000 , count: 0, checked: false, },
   { title: "칭의에서 성화로", price: 5000, discountedPrice: 4000 , count: 0, checked: false, },
+  { title: "순간의 선택이 영원을 좌우한다", price: 8000, discountedPrice: 7000 , count: 0, checked: false, },
+  { title: "믿음 사용 설명서", price: 4000, discountedPrice: 3000 , count: 0, checked: false, },
+  { title: "솔로몬의 인생 보고서 전도서", price: 14000, discountedPrice: 12000 , count: 0, checked: false, },
+  { title: "룻기", price: 5000, discountedPrice: 4000 , count: 0, checked: false, },
+  { title: "바울의 기도", price: 7000, discountedPrice: 6000 , count: 0, checked: false, },
+  { title: "다윗의 실패", price: 7000, discountedPrice: 6000 , count: 0, checked: false, },
+  { title: "광야 이야기", price: 5000, discountedPrice: 4000 , count: 0, checked: false, },
+  { title: "금송아지 사건", price: 5000, discountedPrice: 4000 , count: 0, checked: false, },
+  { title: "의롭게 사는 법", price: 4000, discountedPrice: 3000 , count: 0, checked: false, },
+  { title: "건전한 교리", price: 5000, discountedPrice: 4000 , count: 0, checked: false, },
+  { title: "승리의 생활", price: 4000, discountedPrice: 3000 , count: 0, checked: false, },
 ]
 
 export const free: Book[] = [
@@ -100,5 +111,6 @@ export const free: Book[] = [
   { title: "사무엘 깁의 욥기", price:  1000, discountedPrice: 500, count: 0, checked: false, },
   { title: "사무엘 깁 설교 1. 성경을 읽는 방법", price:  1000, discountedPrice: 500, count: 0, checked: false, },
   { title: "최고수준의 생활", price:  1000, discountedPrice: 500, count: 0, checked: false, },
-  { title: "신양에 관한 질문", price:  1000, discountedPrice: 500, count: 0, checked: false, },
+  { title: "신앙에 관한 질문", price:  1000, discountedPrice: 500, count: 0, checked: false, },
+  { title: "예수님의 이름과 칭호들", price:  1000, discountedPrice: 500, count: 0, checked: false, },
 ]
